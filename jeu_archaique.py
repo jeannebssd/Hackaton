@@ -11,26 +11,12 @@ clock = pg.time.Clock()
 
 #1. Fond d'écran du jeu
 
-screen = pg.display.set_mode((600, 600))
+screen = pg.display.set_mode((600, 600)) #qui donnera du 20x20
 BLACK = (0, 0, 0)
 screen.fill(BLACK)
 
-info_1 = [[100,100], 20, 10]
+info_1 = [[10,10], 3, 3]
 info_2 = [[200,200], 30, 30]
-
-def pourtour(info):
-    """
-    return the list of coordonnates of the walls, takes in argument the information on the room 
-    """
-    x0, y0 = room[0]
-    L, l = room[1], room[2]
-    liste = [[x0,y0]]
-    mur_haut = [[x0+k,y0] for k in range(L)]
-    mur_droit = [[x0+L,y0-k] for k in range(l)]
-    mur_bas = [[x0+k,y0-l] for k in range(L)]
-    mur_gauche = [[x0,y0-k] for k in range(l)]
-    liste += mur_haut + mur_droit + mur_gauche + mur_bas
-    return(liste)
 
 def draw_room(info): 
     point, L, l = info
@@ -38,10 +24,10 @@ def draw_room(info):
     #dessine les murs 
     x0, y0 = point
     liste = [[x0,y0]]
-    mur_haut = [[x0+k,y0] for k in range(1,L)]
-    mur_droit = [[x0+L,y0-k] for k in range(1,l)]
-    mur_bas = [[x0+k,y0-l] for k in range(1,L)]
-    mur_gauche = [[x0,y0-k] for k in range(1,l)]
+    mur_haut = [[x0+k,y0] for k in range(0,L)]
+    mur_droit = [[x0+L,y0-k] for k in range(0,l)]
+    mur_bas = [[x0+k,y0-l] for k in range(0,L)]
+    mur_gauche = [[x0,y0-k] for k in range(0,l)]
     liste += mur_haut + mur_droit + mur_gauche + mur_bas 
     for elt in liste : 
         rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 30, 30)
@@ -55,7 +41,18 @@ def draw_room(info):
 
 draw_room(info_1)
 
-while True:
-    pass
+
+
+# Pour savoir si le bonhomme est encore dans la classe 
+def in_scope(tile):
+    x, y = tile
+    return 0 <= x < X and 0 <= y < Y
+
+
+running = True
+while running:
+
+    clock.tick(15)
+    pg.display.update()
 
 pg.quit()
