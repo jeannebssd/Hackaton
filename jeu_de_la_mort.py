@@ -1,6 +1,6 @@
 import numpy as np
 import math 
-import numpy.random as rd
+import random as rd
 
 import pygame as pg
 from random import randint
@@ -20,17 +20,13 @@ screen.fill(BLACK)
 #2. Deplacement
 def room_information():
     '''
-    return the list of lists that contain the aleatory coords of the , based on the number 
-    of box
+    return the list that contain the aleatory the top-left coordinate of the room, the length L and width l of the room
     '''
-    liste_surfaces = []
-    for i in range (number_of_room):
-        L = rd.randint(1, 10) #longueur de la chambre
-        l = rd.randint(1, 10) #largeur de la chambre
-        x, y = rd.randint(1, 600-L), rd.randint(1, 600-l)
-        return([x,y], L, l)
+    L = rd.randint(1, 10) #longueur de la chambre
+    l = rd.randint(1, 10) #largeur de la chambre
+    x, y = rd.randint(1, 600-L), rd.randint(1, 600-l)
+    return[[x,y], L, l]
         
-
 def pourtour(room):
     """
     return the list of coordonnates of the walls, takes in argument the information on the room 
