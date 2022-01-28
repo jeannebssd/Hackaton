@@ -1,0 +1,116 @@
+# v1 : pareil mais au moins on peut sortir du programme
+# avec la touche 'q', ou avec la souris en fermant la fenêtre
+
+import pygame as pg
+from random import randint
+
+direction=[1,0]
+snake = [
+    (10, 15),
+    (11, 15),
+    (12, 15),
+]
+
+score=0
+
+pg.init()
+clock = pg.time.Clock()
+
+screen = pg.display.set_mode((600, 600))
+blanc = (225, 225, 225)
+screen.fill(blanc)
+width = 30 
+height = 30
+noir=(0,0,0)
+red = (255, 0, 0) 
+for i in range (0,22,2):
+    for j in range (0,22,2):
+        x=width*i
+        y=height*j
+        a=30+width*i
+        b=30+height*j
+        rect1 = pg.Rect(x, y, width, height)
+        rect2 = pg.Rect(a, b, width, height)
+        pg.draw.rect(screen, noir, rect1)
+        pg.draw.rect(screen, noir, rect2)
+
+fruit=(randint(0,19),randint(0,19))
+f1,f2=fruit
+rect_fruit = pg.Rect(f1*30, f2*30, 30, 30)
+pg.draw.rect(screen, (255,0,0), rect_fruit)
+
+# on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
+running = True
+while running:
+    clock.tick(2)
+
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            running = False
+            # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
+        elif event.type == pg.KEYDOWN:
+                # si la touche est "Q" on veut quitter le programme
+            if event.key == pg.K_q:
+                running = False
+            if event.key == pg.K_UP:
+                direction=[0,-1]
+            if event.key == pg.K_DOWN:
+                direction=[0,1]
+            if event.key == pg.K_RIGHT:
+                direction=[1,0]
+            if event.key == pg.K_LEFT:
+                direction=[-1,0]
+            # chaque évênement à un type qui décrit la nature de l'évênement
+            # un type de pg.QUIT signifie que l'on a cliqué sur la "croix" de la fenêtre
+
+    screen = pg.display.set_mode((600, 600))
+    blanc = (225, 225, 225)
+    screen.fill(blanc)
+    width = 30 
+    height = 30
+    noir=(0,0,0)
+    red = (255, 0, 0) 
+    for i in range (0,22,2):
+        for j in range (0,22,2):
+            x=width*i
+            y=height*j
+            a=30+width*i
+            b=30+height*j
+            rect1 = pg.Rect(x, y, width, height)
+            rect2 = pg.Rect(a, b, width, height)
+            pg.draw.rect(screen, noir, rect1)
+            pg.draw.rect(screen, noir, rect2)
+
+    x,y=snake[-1]
+    snake.append((x+direction[0],y+direction[1]))
+    snake.pop(0)
+
+    for l,c in snake :
+        rect = pg.Rect(l*30,c*30,30,30)
+        pg.draw.rect(screen,(0,255,0),rect)
+    
+    if snake[-1]==fruit :
+        score+=1
+        x,y=snake[-1]
+        snake.append((x+direction[0],y+direction[1]))
+        fruit=(randint(0,19),randint(0,19))
+        f1,f2=fruit
+        rect_fruit = pg.Rect(f1*30, f2*30, 30, 30)
+        pg.draw.rect(screen, (255,0,0), rect_fruit)
+    else:
+        pg.draw.rect(screen, (255,0,0), rect_fruit)
+
+    for i in range (len(snake)-1):
+        if snake[-1]==snake[i]:
+            running = False
+
+  
+    pg.display.update()
+
+# Enfin on rajoute un appel à pg.quit()
+# Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows
+pg.quit()
+
+
+
+    
