@@ -10,8 +10,10 @@ from jeanne import room_information, pourtour
 
 PV = 5   # nombre de vies initiales
 
-
-
+IP = False
+IP2 = False
+F = 0
+L = []
 
 
 # #1. Fond d'écran du jeu
@@ -180,7 +182,14 @@ while running:
             N = rd.randint(0,10)
             if N >=7:
                 PV -=1
-            pg.display.set_caption(f"Vies restantes : {PV}")
+                print("Le King vous a blessé, vous n'avez pas pu vous défendre")
+            else:
+                print("Vous avez résisté à l'atttaque du King")
+                if N >= 8:
+                    F +=1
+                    print("Vous avez brillamment vaincu le King et gagné 1 point de force")
+
+            pg.display.set_caption(f"Vies restantes : {PV} et force : {F} | POTIONS : {L}")
     
     if PV == 0:
         print(f"Game over")
@@ -202,7 +211,24 @@ while running:
     character = move(character, direction)
     draw_background()
 
-    draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
+    if new_character == invisible_potion and IP == False:
+        print("Vous avez récupéré une **invisible_potion**")
+        IP = True
+        L.append("invicible_potion")
+
+    if new_character == heart_potion and IP2 == False:
+        print("Vous avez récupéré une **heart_potion**")
+        print("Vous avez donc le droit à une vie supplémentaire")
+        PV += 1
+        IP2 = True
+        L.append("heart_potion")
+
+    if IP == False:     # la potion disparait une fois récupérée
+        draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
+
+    if IP2 == False:     # la potion disparait une fois récupérée
+        draw_tile(heart_potion[0], heart_potion[1], heart_potion_color)
+
     direction = (0, 0)
     draw_tile(K[0], K[1], KING_COLOR)
 
@@ -212,7 +238,7 @@ while running:
     draw_door([10 ,10 - 2 ])
     draw_door([2 + 3 ,4 ])  
     draw_tile(character[0], character[1], CHARACTER_COLOR)
-    pg.display.set_caption(f"Vies restantes : {PV}")
+    pg.display.set_caption(f"Vies restantes : {PV} et force : {F} | POTIONS : {L}")
 
     pg.display.update()
 
