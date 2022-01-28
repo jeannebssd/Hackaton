@@ -9,6 +9,10 @@ clock = pg.time.Clock()
 
 #1. Fond d'écran du jeu
 
+screen = pg.display.set_mode((600, 600))
+WHITE = (240, 240, 240)
+screen.fill(WHITE)
+
 #2. Jeu 
 
 running = True
