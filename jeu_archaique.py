@@ -12,8 +12,6 @@ PV = 5   # nombre de vies initiales
 F = 0    # force initiale
 
 
-
-
 # #1. Fond d'écran du jeu
 
 # screen = pg.display.set_mode((600, 600)) #qui donnera du 20x20
@@ -129,7 +127,7 @@ def draw_background():
     screen.fill(BLACK)
 
 
-character_initial = (10, 15)
+character_initial = (8, 8)
 character = character_initial
 
 
@@ -170,7 +168,7 @@ while running:
             direction = (0, 0)
             print("Interdit de quitter le couloir")
 
-    K = (10, 20)   # coordonées du king
+    K = (36, 28)   # coordonées du king
     KING_COLOR = (255, 248, 220)
     
     # combat avec le King
@@ -198,8 +196,11 @@ while running:
 
     # les potions
 
-    invisible_potion = (20, 20)   # coordonées de la potion
+    invisible_potion = (32, 25)   # coordonées de la potion
     invisible_potion_color = (255, 20, 147)
+
+    heart_potion = (12,9)
+    heart_potion_color = (255, 255, 0)
 
     if new_character == invisible_potion:
         draw_tile(invisible_potion[0], invisible_potion[1], (0,0,0))
