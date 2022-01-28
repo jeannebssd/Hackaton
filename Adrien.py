@@ -74,8 +74,12 @@ for i in (info_1, info_2):
     for j in pourtour(i):
         murs.append(i)
 
-corridor =  [[5,13-k] for k in range(5,10)] + [[5+k,8] for k in range(0,6)]
+print(murs)
 
+corridor =  [[5,13-k] for k in range(5,10)] + [[5+k,8] for k in range(0,6)]
+print(corridor)
+
+break
 running = True
 while running:
 
