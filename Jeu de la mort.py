@@ -71,12 +71,17 @@ while running:
 
 
 
-def nombre_salle():
+def number_room():
     k = randint(2,10)   # on considère que l'on a a minima 2 salles
 
 
 def genere_salle():
-    
+    M = np.zeros()              # M est la matrice représentant la salle en question
+    point, L, l = room_information()
+    # génération des murs
+
+
+
 
 
 
