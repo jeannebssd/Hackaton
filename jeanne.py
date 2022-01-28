@@ -26,3 +26,15 @@ def pourtour(room):
     liste += mur_haut + mur_droit + mur_gauche + mur_bas
     return(liste)
 
+def draw_room(room): 
+    L, l = room.shape()
+    for i in range (1,L-1): #on ne prend pas les murs en compte
+        for j in range (1,l-1):
+            point = room[i,j]
+            
+    
+    
+    fruit=(randint(0,19),randint(0,19))
+    f1,f2=fruit
+rect_fruit = pg.Rect(f1*30, f2*30, 30, 30)
+pg.draw.rect(screen, (255,0,0), rect_fruit) 

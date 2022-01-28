@@ -1,3 +1,3 @@
 
-from Jeanne import room_information 
+from jeanne import room_information 
 print(room_information())
