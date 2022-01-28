@@ -4,6 +4,8 @@ import random as rd
 import pygame as pg
 from itertools import product
 
+from jeanne import room_information, pourtour
+
 # def number_room():
 #     k = rd.randint(2,10)   # on considère que l'on a a minima 2 salles
 
@@ -61,8 +63,11 @@ def draw_background():
 character_initial = (10, 15)
 character = character_initial
 
+info_1 = [[10,10], 3, 3]
+info_2 = [[200,200], 30, 30]
+
 murs = []
-for i in rooms:
+for i in (info_1, info_2):
     for j in pourtour(i):
         murs.append(i)
 
@@ -87,41 +92,37 @@ while running:
                 running = False
     
     new_character = move(character, direction)
-    if new_character in murs:
-        if new_character not in corridor:
-            direction = (0, 0)
-            print("Interdit de foncer dans le mur")
-    elif character in corridor:
-        if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
-            direction = (0, 0)
-            print("Interdit de quitter le couloir")
+   # if new_character in murs:
+   #     if new_character not in corridor:
+   #         direction = (0, 0)
+   #         print("Interdit de foncer dans le mur")
+   # elif character in corridor:
+   #     if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
+   #         direction = (0, 0)
+   #         print("Interdit de quitter le couloir")
     character = move(character, direction)
     draw_background()
     draw_tile(character[0], character[1], CHARACTER_COLOR)
     direction = (0, 0)
+
+    PV = 5   # nombre de vies initiales
+    pg.display.set_caption(f"Vies restantes : {PV}")
+
+    K = (10, 20)   # coordonées du king
+    KING_COLOR = (255, 248, 220)
+    draw_tile(K[0], K[1], KING_COLOR)
+
+    # combat avec le King
+
+    N = rd.randint(0,10)
+    if N >=7:
+        PV -=1
+    print("Vous avez perdu face au King")
+
 
     pg.display.update()
 
 pg.quit()
 
 
-PV = 5   # nombre de vies initiales
-pg.display.set_caption(f"Vies restantes: {PV}")
 
-K = (30, 20)   # coordonées du king
-
-W = 10
-H = 10
-X = 40
-Y = 40
-KING_COLOR = ()
-
-def draw_tile(x, y, color):
-    """
-    x and y in tiles coordinates
-    translate into pixel coordinates for painting
-    """
-    rect = pg.Rect(x * W, y * H, W, H)
-    pg.draw.rect(screen, color, rect)
-
-draw_tile(K[0], K[1],  )
