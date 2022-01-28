@@ -1,6 +1,6 @@
 import numpy as np
 import math 
-import numpy.random as rd
+import random as rd
 import pygame as pg
 from itertools import product
 
@@ -54,12 +54,12 @@ pg.init()
 screen = pg.display.set_mode((X * W, Y * H))
 clock = pg.time.Clock()
 
-character = (10, 15)
+character_initial = (10, 15)
 
 def move(character, direction):
     x, y = character
     dx, dy = direction
-    character = (x + dx, y + dy)
+    return (x + dx, y + dy)
 
 WHITE = (240, 240, 240)
 BLACK = (255, 255, 255)
@@ -70,10 +70,11 @@ def draw_background():
             if (x + y) % 2 == 0:
                 draw_tile(x, y, BLACK)
 
+character = character_initial
 running = True
 while running:
 
-    clock.tick(15)
+    clock.tick(5)
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -90,9 +91,10 @@ while running:
             elif event.key == pg.K_q:
                 running = False
 
-    move(character, direction)
+    character = move(character, direction)
     draw_background()
     draw_tile(character[0], character[1], CHARACTER_COLOR)
+    direction = (0, 0)
 
     pg.display.update()
 
