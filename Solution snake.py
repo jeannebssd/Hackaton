@@ -1,4 +1,4 @@
-a# Python Standard Library
+# Python Standard Library
 from random import randint, choice
 
 # Third-Party Libraries
