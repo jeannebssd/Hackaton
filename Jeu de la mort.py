@@ -71,5 +71,13 @@ while running:
 
 
 
+def nombre_salle():
+    k = randint(2,10)   # on considère que l'on a a minima 2 salles
+
+
+def genere_salle():
+    
+
+
 
 pg.quit()
