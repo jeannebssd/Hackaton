@@ -14,6 +14,7 @@ PV = 5   # nombre de vies initiales
 IP = False
 IP2 = False
 F = 0
+L = []
 
 
 # #1. Fond d'écran du jeu
@@ -211,7 +212,7 @@ while running:
                     F +=1
                     print("Vous avez brillamment vaincu le King et gagné 1 point de force")
 
-            pg.display.set_caption(f"Vies restantes : {PV} et force : {F}")
+            pg.display.set_caption(f"Vies restantes : {PV} et force : {F} | POTIONS : {L}")
     
     if PV == 0:
         print(f"Game over")
@@ -235,12 +236,14 @@ while running:
     if new_character == invisible_potion and IP == False:
         print("Vous avez récupéré une **invisible_potion**")
         IP = True
+        L.append("invicible_potion")
 
     if new_character == heart_potion and IP2 == False:
         print("Vous avez récupéré une **heart_potion**")
         print("Vous avez donc le droit à une vie supplémentaire")
         PV += 1
         IP2 = True
+        L.append("heart_potion")
 
     if IP == False:     # la potion disparait une fois récupérée
         draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
@@ -257,7 +260,7 @@ while running:
     draw_door([10 ,10 - 2 ])
     draw_door([2 + 3 ,4 ])  
     draw_tile(character[0], character[1], CHARACTER_COLOR)
-    pg.display.set_caption(f"Vies restantes : {PV} et force : {F}")
+    pg.display.set_caption(f"Vies restantes : {PV} et force : {F} | POTIONS : {L}")
 
     pg.display.update()
 
