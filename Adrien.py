@@ -74,6 +74,8 @@ for i in (info_1, info_2):
     for j in pourtour(i):
         murs.append(i)
 
+corridor =  [[5,13-k] for k in range(5,10)] + [[5+k,8] for k in range(0,6)]
+
 running = True
 while running:
 
@@ -95,14 +97,14 @@ while running:
                 running = False
     
     new_character = move(character, direction)
-   # if new_character in murs:
-   #     if new_character not in corridor:
-   #         direction = (0, 0)
-   #         print("Interdit de foncer dans le mur")
-   # elif character in corridor:
-   #     if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
-   #         direction = (0, 0)
-   #         print("Interdit de quitter le couloir")
+    if new_character in murs:
+        if new_character not in corridor:
+            direction = (0, 0)
+            print("Interdit de foncer dans le mur")
+    elif character in corridor:
+        if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
+            direction = (0, 0)
+            print("Interdit de quitter le couloir")
 
     K = (10, 20)   # coordonées du king
     KING_COLOR = (255, 248, 220)
