@@ -72,7 +72,7 @@ def number_room():
 
 
 def genere_salle():
-    point, L, l = (-1,2), 4, 5     #room_information()
+    point, L, l = room_information()     
     M = np.array(L*[l*["."]])      # M est la matrice représentant la salle en question
                                    # elle est initialement pleine de points
 
@@ -88,6 +88,12 @@ def genere_salle():
     return M
 
 print(genere_salle())
+
+
+# définition du personnage 
+
+CHARACTER_COLOR = (128, 128, 0)
+DIRECTIONS = {"DOWN": (0, -1), "UP": (0, +1), "RIGHT": (+1, 0), "LEFT": (-1, 0)}
 
 
 
