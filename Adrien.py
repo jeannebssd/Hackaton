@@ -124,9 +124,19 @@ while running:
     if new_character == K:
         direction = (0, 0)
 
+    # les potions
+
+    invisible_potion = (20, 20)   # coordonées de la potion
+    invisible_potion_color = (255, 20, 147)
+
+    if new_character == invisible_potion:
+        draw_tile(invisible_potion[0], invisible_potion[1], (0,0,0))
+        print(f"Vous avez récupéré une **invisble_potion**")
+
     character = move(character, direction)
     draw_background()
 
+    draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
     draw_tile(character[0], character[1], CHARACTER_COLOR)
     direction = (0, 0)
     draw_tile(K[0], K[1], KING_COLOR)
