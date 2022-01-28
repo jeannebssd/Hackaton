@@ -47,10 +47,18 @@ def draw_room(info):
 draw_room(info_1)
 draw_room(info_2)
 
-def draw_door(room):
-    i,j = np.random()
-    rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
-        pg.draw.rect(screen, (100,0,0), rect_mur)
+# def draw_door(room):
+#     i,j = rd.randint()
+#     rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
+#         pg.draw.rect(screen, (100,0,0), rect_mur)
+
+def draw_door(coords):
+    x,y = coords[0], coords[1]
+    rect_mur = pg.Rect(x*30, y*30, 10, 10)
+    pg.draw.rect(screen, (100,0,0), rect_mur)
+
+draw_door([10 ,10 -1 ])
+draw_door([2 + 4 ,4 ])
 
 
 # Pour savoir si le bonhomme est encore dans la classe 
