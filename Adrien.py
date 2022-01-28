@@ -4,6 +4,8 @@ import random as rd
 import pygame as pg
 from itertools import product
 
+from jeanne import room_information, pourtour
+
 # def number_room():
 #     k = rd.randint(2,10)   # on considère que l'on a a minima 2 salles
 
@@ -61,10 +63,13 @@ def draw_background():
 character_initial = (10, 15)
 character = character_initial
 
+info_1 = [[10,10], 3, 3]
+info_2 = [[200,200], 30, 30]
+
 murs = []
-# for i in rooms:
-#     for j in pourtour(i):
-#         murs.append(i)
+for i in (info_1, info_2):
+    for j in pourtour(i):
+        murs.append(i)
 
 running = True
 while running:
