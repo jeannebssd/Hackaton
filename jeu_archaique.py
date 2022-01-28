@@ -1,3 +1,4 @@
+from curses import KEY_LEFT
 import numpy as np
 import math 
 import random as rd
@@ -10,7 +11,7 @@ from jeanne import room_information, pourtour
 
 PV = 5   # nombre de vies initiales
 
-
+IP = False
 
 
 
@@ -190,9 +191,38 @@ while running:
     if new_character == K:
         direction = (0, 0)
 
+    # deplacement du King
+# def move_k(vect):
+#     a,b = vect
+#     maxi = max(a,b)
+#     if maxi == a:
+#         if maxi > 0:
+#             K[0]+=1
+#         else:
+#             K[0]-=1
+#     if maxi == b:
+#         if maxi > 0:
+#             K[1]+=1
+#         else:
+#             K[1]-=1
+
+# def move_king():
+#     inroom = False
+#     if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_RIGHT :
+#         inroom = True
+#     if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_LEFT :
+#         inroom = False
+#     vecteur = character[0]-K[0],character[1]-K[1]
+#     move_k(vecteur)
+
+# move_king()
+
+
+
+
     # les potions
 
-    invisible_potion = (20, 20)   # coordonées de la potion
+    invisible_potion = (32, 25)   # coordonées de la potion
     invisible_potion_color = (255, 20, 147)
 
     if new_character == invisible_potion:
@@ -202,7 +232,13 @@ while running:
     character = move(character, direction)
     draw_background()
 
-    draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
+    if new_character == invisible_potion and IP == False:
+        print("Vous avez récupéré une **invisible_potion**")
+        IP = True
+
+    if IP == False:     # la potion disparait une fois récupérée
+        draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
+
     direction = (0, 0)
     draw_tile(K[0], K[1], KING_COLOR)
 
