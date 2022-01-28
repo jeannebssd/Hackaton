@@ -6,8 +6,6 @@ import pygame as pg
 from random import randint
 
 
-score=0
-
 pg.init()
 clock = pg.time.Clock()
 
