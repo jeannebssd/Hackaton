@@ -207,7 +207,7 @@ while running:
                 print("Le King vous a blessé, vous n'avez pas pu vous défendre")
             else:
                 print("Vous avez résisté à l'atttaque du King")
-                if N >= 9:
+                if N >= 8:
                     F +=1
                     print("Vous avez brillamment vaincu le King et gagné 1 point de force")
 
