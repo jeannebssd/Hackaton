@@ -15,32 +15,42 @@ screen = pg.display.set_mode((600, 600)) #qui donnera du 20x20
 BLACK = (0, 0, 0)
 screen.fill(BLACK)
 
-info_1 = [[10,10], 3, 3]
-info_2 = [[200,200], 30, 30]
+info_1 = [[10,10], 3, 3] #rect de 3*3 
+info_2 = [[2,4], 5, 2]
 
 def draw_room(info): 
     point, L, l = info
     
     #dessine les murs 
     x0, y0 = point
-    liste = [[x0,y0]]
     mur_haut = [[x0+k,y0] for k in range(0,L)]
-    mur_droit = [[x0+L,y0-k] for k in range(0,l)]
-    mur_bas = [[x0+k,y0-l] for k in range(0,L)]
-    mur_gauche = [[x0,y0-k] for k in range(0,l)]
-    liste += mur_haut + mur_droit + mur_gauche + mur_bas 
-    for elt in liste : 
-        rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 30, 30)
+    mur_droit = [[x0+L,y0-k] for k in range(1,l+1)]
+    mur_bas = [[x0+k,y0-l] for k in range(0,L+1)]
+    mur_gauche = [[x0,y0-k] for k in range(0,l+1)]
+    liste_hor = mur_haut + mur_bas 
+    liste_ver = mur_gauche + mur_droit
+    for i in range (0,len(liste_hor)-1) : 
+        elt = liste_hor[i]
+        rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 40, 10)
+        pg.draw.rect(screen, (255,0,0), rect_mur)
+    for i in range (1,len(liste_ver)) : 
+        elt = liste_ver[i]
+        rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
         pg.draw.rect(screen, (255,0,0), rect_mur)
 
     #on dessine les points
-    for i in range (1,L-1): #on ne prend pas les murs en compte
-        for j in range (1,l-1):
-            rect_point = pg.Rect((x0+50*i)*30, (y0+50*j)*30, 30, 30)
-            pg.draw.rect(screen, (0,255,0), rect_point)
+    # for i in range (0,L-1): #on ne prend pas les murs en compte
+    #     for j in range (0,l-1):
+    #         pg.draw.circle(screen, (0,255,0), [(30*x0+i), (30*y0+j)], 3)
+
 
 draw_room(info_1)
+draw_room(info_2)
 
+def draw_door(room):
+    i,j = np.random()
+    rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
+        pg.draw.rect(screen, (100,0,0), rect_mur)
 
 
 # Pour savoir si le bonhomme est encore dans la classe 
