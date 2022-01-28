@@ -16,7 +16,7 @@ IP3 = False
 F = 0
 L = []
 S = 0
-
+i = rd.randint(0,4)
 
 # #1. Fond d'écran du jeu
 
@@ -210,7 +210,8 @@ while running:
     invisible_potion_color = (255, 20, 147)
     heart_potion = (8,8)
     heart_potion_color = (0,128,0)
-    bourse = (17,10)
+    Z = [(12,10), (7,7),(10,8),(13,11)]
+    bourse = Z[i]
     or_color = (255,215,0)
 
 
