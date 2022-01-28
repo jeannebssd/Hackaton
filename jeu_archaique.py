@@ -130,7 +130,7 @@ def draw_background():
     screen.fill(BLACK)
 
 
-character_initial = (10, 15)
+character_initial = (8, 8)
 character = character_initial
 
 
@@ -171,7 +171,7 @@ while running:
             direction = (0, 0)
             print("Interdit de quitter le couloir")
 
-    K = (10, 20)   # coordonées du king
+    K = (36, 28)   # coordonées du king
     KING_COLOR = (255, 248, 220)
     
     # combat avec le King
