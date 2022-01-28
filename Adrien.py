@@ -62,9 +62,9 @@ character_initial = (10, 15)
 character = character_initial
 
 murs = []
-for i in rooms:
-    for j in pourtour(i):
-        murs.append(i)
+# for i in rooms:
+#     for j in pourtour(i):
+#         murs.append(i)
 
 running = True
 while running:
@@ -87,41 +87,37 @@ while running:
                 running = False
     
     new_character = move(character, direction)
-    if new_character in murs:
-        if new_character not in corridor:
-            direction = (0, 0)
-            print("Interdit de foncer dans le mur")
-    elif character in corridor:
-        if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
-            direction = (0, 0)
-            print("Interdit de quitter le couloir")
+   # if new_character in murs:
+   #     if new_character not in corridor:
+   #         direction = (0, 0)
+   #         print("Interdit de foncer dans le mur")
+   # elif character in corridor:
+   #     if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
+   #         direction = (0, 0)
+   #         print("Interdit de quitter le couloir")
     character = move(character, direction)
     draw_background()
     draw_tile(character[0], character[1], CHARACTER_COLOR)
     direction = (0, 0)
+
+    PV = 5   # nombre de vies initiales
+    pg.display.set_caption(f"Vies restantes : {PV}")
+
+    K = (10, 20)   # coordonées du king
+    KING_COLOR = (255, 248, 220)
+    draw_tile(K[0], K[1], KING_COLOR)
+
+    # combat avec le King
+
+    N = rd.randint(0,10)
+    if N >=7:
+        PV -=1
+    print("Vous avez perdu face au King")
+
 
     pg.display.update()
 
 pg.quit()
 
 
-PV = 5   # nombre de vies initiales
-pg.display.set_caption(f"Vies restantes: {PV}")
 
-K = (30, 20)   # coordonées du king
-
-W = 10
-H = 10
-X = 40
-Y = 40
-KING_COLOR = ()
-
-def draw_tile(x, y, color):
-    """
-    x and y in tiles coordinates
-    translate into pixel coordinates for painting
-    """
-    rect = pg.Rect(x * W, y * H, W, H)
-    pg.draw.rect(screen, color, rect)
-
-draw_tile(K[0], K[1],  )
