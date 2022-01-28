@@ -54,6 +54,28 @@ clock = pg.time.Clock()
 info_1 = [[10,10], 3, 3] #rect de 3*3 
 info_2 = [[2,4], 5, 2]
 
+def move_k(vect):
+    a,b = vect
+    maxi = max(a,b)
+    if maxi == a:
+        if maxi > 0:
+            K[0]+=1
+        else:
+            K[0]-=1
+    if maxi == b:
+        if maxi > 0:
+            K[1]+=1
+        else:
+            K[1]-=1
+
+def move_king():
+    inroom = False
+    if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_RIGHT :
+        inroom = True
+    if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_LEFT :
+        inroom = False
+    vecteur = character[0]-K[0],character[1]-K[1]
+    move_k(vecteur)
 
 def draw_room(info): 
     point, L, l = info
@@ -190,34 +212,6 @@ while running:
     
     if new_character == K:
         direction = (0, 0)
-
-    # deplacement du King
-# def move_k(vect):
-#     a,b = vect
-#     maxi = max(a,b)
-#     if maxi == a:
-#         if maxi > 0:
-#             K[0]+=1
-#         else:
-#             K[0]-=1
-#     if maxi == b:
-#         if maxi > 0:
-#             K[1]+=1
-#         else:
-#             K[1]-=1
-
-# def move_king():
-#     inroom = False
-#     if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_RIGHT :
-#         inroom = True
-#     if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_LEFT :
-#         inroom = False
-#     vecteur = character[0]-K[0],character[1]-K[1]
-#     move_k(vecteur)
-
-# move_king()
-
-
 
 
     # les potions
