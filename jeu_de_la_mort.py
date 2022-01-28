@@ -72,7 +72,7 @@ def number_room():
 
 
 def genere_salle():
-    point, L, l = (-1,2), 4, 5     #room_information()
+    point, L, l = room_information()     
     M = np.array(L*[l*["."]])      # M est la matrice représentant la salle en question
                                    # elle est initialement pleine de points
 
