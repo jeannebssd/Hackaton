@@ -12,8 +12,10 @@ PV = 5   # nombre de vies initiales
 
 IP = False
 IP2 = False
+IP3 = False
 F = 0
 L = []
+S = 0
 
 
 # #1. Fond d'écran du jeu
@@ -131,16 +133,19 @@ def draw_background():
     screen.fill(BLACK)
 
 
-character_initial = (10, 15)
+character_initial = (10, 8)
 character = character_initial
 
+murs = [(6,6), (6,7), (6,8), (6,9), (6,10),(6,11), (6,12), (21,6), (21,7), (21,8), (21,9), (21,10),(21,11), (21,12),
+         (7,6), (8,6), (9,6), (10,6), (11,6), (12,6), (13,6), (14,6), (15,6), (16,6), (17,6), (18,6), (19,6), (20,6), (21,6),
+         (7,12), (8,12), (9,12), (10,12), (11,12), (12,12), (13,12), (14,12), (16,12), (17,12), (18,12), (19,12), (20,12), (21,12),
+         (30, 21), (31, 21), (32, 21), (33, 21), (34, 21), (35, 21), (36, 21), (37, 21), (38, 21), (39, 21),
+         (30, 31), (31, 31), (32, 31), (33, 31), (34, 31), (35, 31), (36, 31), (37, 31), (38, 31), (39, 31),
+         (30, 21), (30, 22), (30, 23), (30, 25), (30, 26), (30, 27), (30, 28), (30, 29), (30, 30), 
+         (39, 21), (39, 22), (39, 23), (39, 24), (39, 25), (39, 26), (39, 27), (39, 28), (39, 29), (39, 30)]
 
-murs = []
-for i in (info_1, info_2):
-    for j in pourtour(i):
-        murs.append(i)
-
-corridor =  [[5,13-k] for k in range(5,10)] + [[5+k,8] for k in range(0,6)]
+corridor = [(15, 13), (15, 14), (15, 15), (15, 16), (15, 17), (15, 18), (15, 19), (15, 20), (15, 21), (15, 22), (15, 23), (15, 24),
+        (16, 24), (17, 24), (18, 24), (19, 24), (20, 24), (21, 24), (22, 24), (23, 24), (24, 24), (25, 24), (26, 24), (27, 24), (28, 24), (29, 24)]
 
 running = True
 while running:
@@ -167,12 +172,12 @@ while running:
         if new_character not in corridor:
             direction = (0, 0)
             print("Interdit de foncer dans le mur")
-    elif character in corridor:
+    elif character in corridor[:-2]:
         if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
             direction = (0, 0)
             print("Interdit de quitter le couloir")
 
-    K = (10, 20)   # coordonées du king
+    K = (32, 27)   # coordonées du king
     KING_COLOR = (255, 248, 220)
     
     # combat avec le King
@@ -185,7 +190,7 @@ while running:
                 print("Le King vous a blessé, vous n'avez pas pu vous défendre")
             else:
                 print("Vous avez résisté à l'atttaque du King")
-                if N >= 8:
+                if N >= 5:
                     F +=1
                     print("Vous avez brillamment vaincu le King et gagné 1 point de force")
 
@@ -201,18 +206,19 @@ while running:
 
     # les potions
 
-    invisible_potion = (20, 20)   # coordonées de la potion
+    invisible_potion = (33, 25)   # coordonées de la potion
     invisible_potion_color = (255, 20, 147)
+    heart_potion = (8,8)
+    heart_potion_color = (0,128,0)
+    bourse = (17,10)
+    or_color = (255,215,0)
 
-    if new_character == invisible_potion:
-        draw_tile(invisible_potion[0], invisible_potion[1], (0,0,0))
-        print(f"Vous avez récupéré une **invisble_potion**")
 
     character = move(character, direction)
     draw_background()
 
     if new_character == invisible_potion and IP == False:
-        print("Vous avez récupéré une **invisible_potion**")
+        print("Vous avez récupéré une **invincible_potion**")
         IP = True
         L.append("invicible_potion")
 
@@ -223,11 +229,19 @@ while running:
         IP2 = True
         L.append("heart_potion")
 
+    if new_character == bourse and IP3 == False:
+        print("Vous avez récupéré une pièce d'or")
+        S += 100
+        IP3 = True
+
     if IP == False:     # la potion disparait une fois récupérée
         draw_tile(invisible_potion[0], invisible_potion[1], invisible_potion_color)
 
     if IP2 == False:     # la potion disparait une fois récupérée
         draw_tile(heart_potion[0], heart_potion[1], heart_potion_color)
+
+    if IP3 == False:     # la potion disparait une fois récupérée
+        draw_tile(bourse[0], bourse[1], or_color)
 
     direction = (0, 0)
     draw_tile(K[0], K[1], KING_COLOR)
@@ -238,7 +252,7 @@ while running:
     draw_door([10 ,10 - 2 ])
     draw_door([2 + 3 ,4 ])  
     draw_tile(character[0], character[1], CHARACTER_COLOR)
-    pg.display.set_caption(f"Vies restantes : {PV} et force : {F} | POTIONS : {L}")
+    pg.display.set_caption(f"Vies : {PV} | Force : {F} | Potions : {L} | Bourse = {S}€")
 
     pg.display.update()
 
