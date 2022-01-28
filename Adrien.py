@@ -103,3 +103,25 @@ while running:
     pg.display.update()
 
 pg.quit()
+
+
+PV = 5   # nombre de vies initiales
+pg.display.set_caption(f"Vies restantes: {PV}")
+
+K = (30, 20)   # coordonées du king
+
+W = 10
+H = 10
+X = 40
+Y = 40
+KING_COLOR = ()
+
+def draw_tile(x, y, color):
+    """
+    x and y in tiles coordinates
+    translate into pixel coordinates for painting
+    """
+    rect = pg.Rect(x * W, y * H, W, H)
+    pg.draw.rect(screen, color, rect)
+
+draw_tile(K[0], K[1],  )
