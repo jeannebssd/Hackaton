@@ -71,9 +71,9 @@ def move_k(vect):
 
 def move_king():
     inroom = False
-    if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_RIGHT :
+    if (character[0], character[1] == 11 , 10 - 2) and event.key == pg.K_RIGHT :
         inroom = True
-    if character[0],character[1] == 11 , 10 - 2 and event.key == pg.K_LEFT :
+    if (character[0], character[1] == 11 , 10 - 2) and event.key == pg.K_LEFT :
         inroom = False
     vecteur = character[0]-K[0],character[1]-K[1]
     move_k(vecteur)
@@ -226,7 +226,7 @@ while running:
 
     invisible_potion = (32, 25)   # coordonées de la potion
     invisible_potion_color = (255, 20, 147)
-    heart_potion = (7,9)
+    heart_potion = (15,9)
     heart_potion_color = (255, 255, 0)
 
     character = move(character, direction)
@@ -238,6 +238,8 @@ while running:
 
     if new_character == heart_potion and IP2 == False:
         print("Vous avez récupéré une **heart_potion**")
+        print("Vous avez donc le droit à une vie supplémentaire")
+        PV += 1
         IP2 = True
 
     if IP == False:     # la potion disparait une fois récupérée
