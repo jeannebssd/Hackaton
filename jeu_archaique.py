@@ -18,6 +18,7 @@ screen.fill(BLACK)
 info_1 = [[10,10], 3, 3] #rect de 3*3 
 info_2 = [[2,4], 5, 2]
 
+
 def draw_room(info): 
     point, L, l = info
     
@@ -47,6 +48,7 @@ def draw_room(info):
 draw_room(info_1)
 draw_room(info_2)
 
+
 # def draw_door(room):
 #     i,j = rd.randint()
 #     rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
@@ -57,14 +59,37 @@ def draw_door(coords):
     rect_mur = pg.Rect(x*30, y*30, 10, 10)
     pg.draw.rect(screen, (100,0,0), rect_mur)
 
-draw_door([10 ,10 -1 ])
-draw_door([2 + 4 ,4 ])
 
+
+# def draw_couloir(room1, room2):
+#     for elt in pourtour(room1):
+#         if couleur == (100,0,0) #si ya une porte 
+
+def draw_couloir():
+    mur_droit = [[5,13-k] for k in range(5,10)]
+    mur_bas = [[5+k,8] for k in range(0,6)]
+    for i in range (0,len(mur_bas)-1) : 
+        elt = mur_bas[i]
+        rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 40, 10)
+        pg.draw.rect(screen, (0,0,255), rect_mur)
+    for i in range (1,len(mur_droit)) : 
+        elt = mur_droit[i]
+        rect_mur = pg.Rect(elt[0]*30, elt[1]*30, 10, 40)
+        pg.draw.rect(screen, (0,0,255), rect_mur)
+
+L_couloir =  [[5,13-k] for k in range(5,10)] + [[5+k,8] for k in range(0,6)]
+
+draw_couloir()
+
+draw_door([10 ,10 - 2 ])
+draw_door([2 + 3 ,4 ])
 
 # Pour savoir si le bonhomme est encore dans la classe 
 def in_scope(tile):
     x, y = tile
     return 0 <= x < X and 0 <= y < Y
+
+
 
 
 running = True
