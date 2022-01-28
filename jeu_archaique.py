@@ -9,7 +9,7 @@ from jeanne import room_information, pourtour
 
 
 PV = 5   # nombre de vies initiales
-
+F = 0    # force initiale
 
 
 
@@ -180,7 +180,13 @@ while running:
             N = rd.randint(0,10)
             if N >=7:
                 PV -=1
-            pg.display.set_caption(f"Vies restantes : {PV}")
+                print("Le KING vous a frappé et vous n'avez pas résisté")
+            else:
+                print("Vous avez résisté à l'attaque du King")
+            if N>=9:
+                F +=1
+                print("Vous avez brillamment battu le KING et augmenté votre force de 1")
+            pg.display.set_caption(f"Vies restantes : {PV} ; Force {F} /10 ")
     
     if PV == 0:
         print(f"Game over")
@@ -197,7 +203,7 @@ while running:
 
     if new_character == invisible_potion:
         draw_tile(invisible_potion[0], invisible_potion[1], (0,0,0))
-        print(f"Vous avez récupéré une **invisble_potion**")
+        print("Vous avez récupéré une **invisble_potion**")
 
     character = move(character, direction)
     draw_background()
@@ -212,7 +218,7 @@ while running:
     draw_door([10 ,10 - 2 ])
     draw_door([2 + 3 ,4 ])  
     draw_tile(character[0], character[1], CHARACTER_COLOR)
-    pg.display.set_caption(f"Vies restantes : {PV}")
+    pg.display.set_caption(f"Vies restantes : {PV} et force acquise : {F}/10 ")
 
     pg.display.update()
 
