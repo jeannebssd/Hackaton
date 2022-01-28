@@ -6,6 +6,9 @@ from itertools import product
 
 from jeanne import room_information, pourtour
 
+
+PV = 5   # nombre de vies initiales
+
 # def number_room():
 #     k = rd.randint(2,10)   # on considère que l'on a a minima 2 salles
 
@@ -100,25 +103,27 @@ while running:
    #     if new_character not in (corridor[corridor.index(character)-1], corridor[corridor.index(character)+1]):
    #         direction = (0, 0)
    #         print("Interdit de quitter le couloir")
-    character = move(character, direction)
-    draw_background()
-    draw_tile(character[0], character[1], CHARACTER_COLOR)
-    direction = (0, 0)
-
-    PV = 5   # nombre de vies initiales
-    pg.display.set_caption(f"Vies restantes : {PV}")
 
     K = (10, 20)   # coordonées du king
     KING_COLOR = (255, 248, 220)
-    draw_tile(K[0], K[1], KING_COLOR)
-
+    
     # combat avec le King
 
-    N = rd.randint(0,10)
-    if N >=7:
-        PV -=1
-    print("Vous avez perdu face au King")
+    if new_character == K:              # pour le combattre il faut aller dessus
+        N = rd.randint(0,10)
+        if N >=7:
+            PV -=1
+        direction = (0,0)
+        pg.display.set_caption(f"Vies restantes : {PV}")
 
+    character = move(character, direction)
+    draw_background()
+
+    draw_tile(character[0], character[1], CHARACTER_COLOR)
+    direction = (0, 0)
+    draw_tile(K[0], K[1], KING_COLOR)
+
+    pg.display.set_caption(f"Vies restantes : {PV}")
 
     pg.display.update()
 
