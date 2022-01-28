@@ -109,12 +109,20 @@ while running:
     
     # combat avec le King
 
-    if new_character == K:              # pour le combattre il faut aller dessus
-        N = rd.randint(0,10)
-        if N >=7:
-            PV -=1
-        direction = (0,0)
-        pg.display.set_caption(f"Vies restantes : {PV}")
+    if new_character != character:
+        if new_character in [(K[0]-1, K[1]), (K[0]+1, K[1]), (K[0], K[1]-1), (K[0], K[1]+1)] :              # pour le combattre il faut aller dessus
+            N = rd.randint(0,10)
+            if N >=7:
+                PV -=1
+            pg.display.set_caption(f"Vies restantes : {PV}")
+    
+    if PV == 0:
+        print(f"Game over")
+        pg.quit()
+        exit()
+    
+    if new_character == K:
+        direction = (0, 0)
 
     character = move(character, direction)
     draw_background()
