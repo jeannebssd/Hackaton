@@ -57,8 +57,8 @@ def draw_door(coords):
     rect_mur = pg.Rect(x*30, y*30, 10, 10)
     pg.draw.rect(screen, (100,0,0), rect_mur)
 
-draw_door([10 + 2 ,10])
-draw_door([2,4 - 1])
+draw_door([10 ,10 -1 ])
+draw_door([2 + 4 ,4 ])
 
 
 # Pour savoir si le bonhomme est encore dans la classe 
