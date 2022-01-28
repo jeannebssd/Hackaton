@@ -1,4 +1,3 @@
-from curses import KEY_LEFT
 import numpy as np
 import math 
 import random as rd
@@ -56,28 +55,6 @@ clock = pg.time.Clock()
 info_1 = [[10,10], 3, 3] #rect de 3*3 
 info_2 = [[2,4], 5, 2]
 
-def move_k(vect):
-    a,b = vect
-    maxi = max(a,b)
-    if maxi == a:
-        if maxi > 0:
-            K[0]+=1
-        else:
-            K[0]-=1
-    if maxi == b:
-        if maxi > 0:
-            K[1]+=1
-        else:
-            K[1]-=1
-
-def move_king():
-    inroom = False
-    if (character[0], character[1] == 11 , 10 - 2) and event.key == pg.K_RIGHT :
-        inroom = True
-    if (character[0], character[1] == 11 , 10 - 2) and event.key == pg.K_LEFT :
-        inroom = False
-    vecteur = character[0]-K[0],character[1]-K[1]
-    move_k(vecteur)
 
 def draw_room(info): 
     point, L, l = info
@@ -154,7 +131,7 @@ def draw_background():
     screen.fill(BLACK)
 
 
-character_initial = (8, 8)
+character_initial = (10, 15)
 character = character_initial
 
 
@@ -195,7 +172,7 @@ while running:
             direction = (0, 0)
             print("Interdit de quitter le couloir")
 
-    K = (36, 28)   # coordonées du king
+    K = (10, 20)   # coordonées du king
     KING_COLOR = (255, 248, 220)
     
     # combat avec le King
@@ -222,13 +199,14 @@ while running:
     if new_character == K:
         direction = (0, 0)
 
-
     # les potions
 
-    invisible_potion = (32, 25)   # coordonées de la potion
+    invisible_potion = (20, 20)   # coordonées de la potion
     invisible_potion_color = (255, 20, 147)
-    heart_potion = (15,9)
-    heart_potion_color = (255, 255, 0)
+
+    if new_character == invisible_potion:
+        draw_tile(invisible_potion[0], invisible_potion[1], (0,0,0))
+        print(f"Vous avez récupéré une **invisble_potion**")
 
     character = move(character, direction)
     draw_background()
