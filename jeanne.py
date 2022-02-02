@@ -34,7 +34,7 @@ def draw_room(room):
             
     
     
-#     fruit=(randint(0,19),randint(0,19))
-#     f1,f2=fruit
-# rect_fruit = pg.Rect(f1*30, f2*30, 30, 30)
-# pg.draw.rect(screen, (255,0,0), rect_fruit) 
+    fruit=(randint(0,19),randint(0,19))
+    f1,f2=fruit
+rect_fruit = pg.Rect(f1*30, f2*30, 30, 30)
+pg.draw.rect(screen, (255,0,0), rect_fruit) 
